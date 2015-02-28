@@ -5,7 +5,7 @@ describe MediaItemsController, :type => :controller do
 
   it { is_expected.to use_before_action :authenticate_user! }
 
-  describe 'index' do
+  describe '#index' do
     before { get :index }
     it { is_expected.to respond_with :ok }
     it { is_expected.to render_template :index }
