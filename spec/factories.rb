@@ -6,8 +6,8 @@ FactoryGirl.define do
   end
 
   factory :media_item do
-    url Faker::Internet.url
-    kind 1
+    url { Faker::Internet.url }
+    kind { MediaItem.kinds.keys.sample }
   end
 end
 
