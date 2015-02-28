@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   resources :media_items, :only => :index
 
-  root :to => 'application#index'
+  root :to => 'media_items#index'
 end
