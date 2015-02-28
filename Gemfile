@@ -15,7 +15,7 @@ gem 'devise'
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.1'
   gem 'factory_girl_rails'
   gem 'faker', '~> 1.0'
   gem 'shoulda-matchers', :require => false
