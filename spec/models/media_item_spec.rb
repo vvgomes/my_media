@@ -17,4 +17,8 @@ describe MediaItem, :type => :model do
   it 'does not allow invalid value for kind' do
     expect { subject.kind = 'invalid' }.to raise_error
   end
+
+  it 'sort by most recent by default' do
+    expect(MediaItem.all.to_sql).to eq MediaItem.all.order(:created_at => :desc).to_sql
+  end
 end

@@ -7,4 +7,5 @@ class MediaItem < ActiveRecord::Base
   validates :url, :presence => true,
     :format => { :with => URI::regexp(%w(http https)), :message => 'Invalid URL' }
 
+  default_scope { order(:created_at => :desc) }
 end
