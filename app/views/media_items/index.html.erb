@@ -1,31 +1,45 @@
-<p id="notice"><%= notice %></p>
-
-<h1 class="col-md-8">
-  <span>Recent Media Items</span>
-  <%= link_to 'New Media item', new_media_item_path, :class => 'btn btn-info pull-right' %>
-</h1>
-<hr />
-
-<% @media_items.each do |media_item| %>
-  <article class="col-md-4">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h2 class="lead"><%= media_item.description %></h2>
-        <a target="blank" href="<%= media_item.url %>">
-          <span class="glyphicon glyphicon-globe"></span>
-          <span><%= media_item.url %></span>
-        </a>
-      </div>
-      <div class="panel-footer">
-        <span class="glyphicon glyphicon-tag"></span>
-        <span><%= t(media_item.kind) %></span>
-        <span class="pull-right">
-          <%= link_to media_item, method: :delete, :class => 'btn btn-danger btn-xs', data: { confirm: 'Are you sure?' } do %>
-            <span class="glyphicon glyphicon-trash">
-          <% end %>
-        </span>
-      </div>
-    </div>
-  </article>
+<% if notice %>
+  <div class="row">
+    <p id="notice" class="col-xs-12 text-center alert alert-info" role="alert" style="margin-top:10px">
+      <%= notice %>
+    </p>
+  </div>
 <% end %>
+
+<header class="row">
+  <h1 class="col-xs-12">
+    <span>Recent Media Items</span>
+    <%= link_to 'New Media item', new_media_item_path, :class => 'btn btn-info pull-right' %>
+  </h1>
+</header>
+
+<hr class="col-xs-12" />
+
+<article class="row">
+  <% @media_items.each do |media_item| %>
+    <section class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2 class="lead"><%= media_item.description %></h2>
+          <a target="blank" href="<%= media_item.url %>">
+            <span class="glyphicon glyphicon-globe"></span>
+            <span><%= media_item.url %></span>
+          </a>
+        </div>
+        <div class="panel-footer">
+          <span class="glyphicon glyphicon-tag"></span>
+          <span><%= t(media_item.kind) %></span>
+          &nbsp;|&nbsp;
+          <span class="glyphicon glyphicon-time"></span>
+          <span><%= distance_of_time_in_words(Time.now, media_item.created_at) %></span>
+          <span class="pull-right">
+            <%= link_to media_item, method: :delete, :class => 'btn btn-danger btn-xs', data: { confirm: 'Are you sure?' } do %>
+              <span class="glyphicon glyphicon-trash">
+            <% end %>
+          </span>
+        </div>
+      </div>
+    </section>
+  <% end %>
+</article>
 
