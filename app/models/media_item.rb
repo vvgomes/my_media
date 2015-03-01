@@ -3,6 +3,7 @@ class MediaItem < ActiveRecord::Base
 
   belongs_to :user
 
+  validates :user, :presence => true
   validates :kind, :presence => true
   validates :url, :presence => true,
     :format => { :with => URI::regexp(%w(http https)), :message => 'Invalid URL' }

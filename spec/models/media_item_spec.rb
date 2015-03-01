@@ -4,6 +4,7 @@ describe MediaItem, :type => :model do
   subject { build(:media_item) }
 
   it { is_expected.to belong_to :user }
+  it { is_expected.to validate_presence_of :user }
 
   it { is_expected.to validate_presence_of :url }
   it { is_expected.to allow_value('http://google.com').for(:url) }
