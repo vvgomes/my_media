@@ -18,9 +18,21 @@ class MediaItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @media_item = MediaItem.find(params[:id])
+    return forbid! unless current_user.able_to_remove?(@media_item)    
+    @media_item.destroy
+    redirect_to media_items_path, notice: 'Media item was successfully destroyed.'
+  end
+
   private
 
   def media_item_params
     params.require(:media_item).permit(:url, :kind, :description)
+  end
+
+  def forbid!
+    render :status => :forbidden, 
+      :text => 'You do not have rights to perform this operation.'
   end
 end

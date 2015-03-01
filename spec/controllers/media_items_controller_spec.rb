@@ -49,4 +49,19 @@ describe MediaItemsController, :type => :controller do
       end
     end
   end
+
+  describe '#destroy' do
+    context 'when the user is the owner' do
+      let(:media_item) { create(:media_item, :user => user) }
+      before { delete :destroy, :id => media_item.id }
+      it { is_expected.to redirect_to media_items_path }
+      it { is_expected.to set_flash }
+    end
+
+    context 'when the user is not the owner' do
+      let(:media_item) { create(:media_item) }
+      before { delete :destroy, :id => media_item.id }
+      it { is_expected.to respond_with :forbidden }
+    end
+  end
 end
