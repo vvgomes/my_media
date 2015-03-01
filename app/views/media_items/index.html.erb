@@ -1,28 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Media Items</h1>
-<%= link_to 'New Media item', new_media_item_path %>
-<table>
-  <thead>
-    <tr>
-      <th>Url</th>
-      <th>Description</th>
-      <th>Kind</th>
-      <th></th>
-    </tr>
-  </thead>
+<h1 class="col-md-8">
+  <span>Recent Media Items</span>
+  <%= link_to 'New Media item', new_media_item_path, :class => 'btn btn-info pull-right' %>
+</h1>
+<hr />
 
-  <tbody>
-    <% @media_items.each do |media_item| %>
-      <tr>
-        <td><%= media_item.url %></td>
-        <td><%= media_item.description %></td>
-        <td><%= media_item.kind %></td>
-        <td><%= link_to 'Destroy', media_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<% @media_items.each do |media_item| %>
+  <article class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h2 class="lead"><%= media_item.description %></h2>
+        <a target="blank" href="<%= media_item.url %>">
+          <span class="glyphicon glyphicon-globe"></span>
+          <span><%= media_item.url %></span>
+        </a>
+      </div>
+      <div class="panel-footer">
+        <span class="glyphicon glyphicon-tag"></span>
+        <span><%= t(media_item.kind) %></span>
+        <span class="pull-right">
+          <%= link_to media_item, method: :delete, :class => 'btn btn-danger btn-xs', data: { confirm: 'Are you sure?' } do %>
+            <span class="glyphicon glyphicon-trash">
+          <% end %>
+        </span>
+      </div>
+    </div>
+  </article>
+<% end %>
 

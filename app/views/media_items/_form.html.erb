@@ -1,29 +1,35 @@
 <%= form_for(@media_item) do |f| %>
-  <% if @media_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@media_item.errors.count, "error") %> prohibited this media_item from being saved:</h2>
+  <fieldset>
+    <% if @media_item.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@media_item.errors.count, "error") %> prohibited this media_item from being saved:</h2>
 
-      <ul>
-      <% @media_item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @media_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :url %><br>
+      <%= f.text_field :url %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :url %><br>
-    <%= f.text_field :url %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :kind %><br>
-    <%= f.number_field :kind %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="form-group">
+      <%= f.label :description %><br>
+      <%= f.text_field :description %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :kind %><br>
+      <%= select(:media_item, :kind,
+        options_for_select(MediaItem.kinds.reduce({}){ |r, i| r.merge(t(i[0]) => i[0]) })) %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit 'Save', :class => 'btn btn-success' %>
+    </div>
+  </fieldset>
 <% end %>
