@@ -10,8 +10,7 @@ class MediaItemsController < ApplicationController
   end
 
   def create
-    @media_item = MediaItem.new(media_item_params)
-    @media_item.users << current_user
+    @media_item = MediaItem.new(media_item_params.merge(:user => current_user))
     if @media_item.save
       redirect_to media_items_path, notice: 'Media item was successfully created.'
     else

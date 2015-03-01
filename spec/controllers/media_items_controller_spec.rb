@@ -35,7 +35,7 @@ describe MediaItemsController, :type => :controller do
       context 'media item' do
         subject { assigns(:media_item) }
         it { is_expected.to be_persisted }
-        it { expect(subject.users.last).to eq user }
+        it { expect(subject.user).to eq user }
       end
     end
 
