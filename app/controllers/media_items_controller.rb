@@ -2,7 +2,7 @@ class MediaItemsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @media_items = MediaItem.all
+    @media_items = MediaItem.where(:user => current_user)
   end
 
   def new

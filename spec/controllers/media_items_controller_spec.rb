@@ -12,7 +12,11 @@ describe MediaItemsController, :type => :controller do
     it { is_expected.to render_template :index }
     
     context 'media items' do
-      it { expect(assigns(:media_items)).not_to be_nil }
+      let!(:media_from_user) { create(:media_item, :user => user) }
+      let!(:media_from_someone_else) { create(:media_item) }
+      subject { assigns(:media_items) }
+      it { is_expected.to include media_from_user }
+      it { is_expected.not_to include media_from_someone_else}
     end
   end
 
