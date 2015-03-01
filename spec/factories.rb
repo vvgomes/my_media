@@ -8,6 +8,7 @@ FactoryGirl.define do
   factory :media_item do
     url { Faker::Internet.url }
     kind { MediaItem.kinds.keys.sample }
+    user
   end
 end
 
